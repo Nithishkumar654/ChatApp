@@ -66,7 +66,7 @@ userApp.post('/login', expressAsyncHandler( async(req, res) => {
             res.status(200).send({message: 'Incorrect Password'})
         }else{
 
-            let jwtToken = jwt.sign({userid: user.userid}, process.env.SECRET_KEY, {expiresIn: '5m'})
+            let jwtToken = jwt.sign({userid: user.userid}, process.env.SECRET_KEY, {expiresIn: '10m'})
 
             res.status(201).send({message: 'Login Success', success: true, token: jwtToken, user: userObj.userid})
         }
@@ -145,7 +145,7 @@ userApp.post('/verifyotp', verifyToken, async(req, res) => {
     }
 })
 
-userApp.post('/update-password', async(req, res) => {
+userApp.post('/update-password', expressAsyncHandler( async(req, res) => {
     
     const usersCollectionObj = req.app.get('usersCollectionObj')
     const user = req.body.userid
@@ -162,5 +162,21 @@ userApp.post('/update-password', async(req, res) => {
 
     res.status(201).send({message: 'New Password Updated', success: true})
 })
+)
+
+userApp.post('/profile-update', expressAsyncHandler( async(req, res) => {
+
+    const usersCollectionObj = req.app.get('usersCollectionObj')
+
+    try{
+        const user = req.body;
+        await usersCollectionObj.updateOne({ userid: user.userid }, { $set: {username: user.username, email: user.email, mobile: user.mobile, picture: user.picture}})
+        res.status(201).send({success: true, message: 'Profile Updated Successfully'})
+    }
+    catch(err){
+        console.log(err)
+        res.status(400).send({message: 'Error while Updating Profile'})
+    }
+}))
 
 module.exports = userApp;

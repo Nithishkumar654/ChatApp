@@ -9,11 +9,15 @@ cloudinary.config({
     api_secret: "yZl92vIRYLgYsfwUNVGgiRp5ml8"
 })
 
+
 let clStorage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
         folder: 'chatfiles',
-        public_id: (req, file) => file.fieldname + "-" + Date.now()
+        public_id: (req, file) => {
+            console.log(file)
+            file.fieldname + "-" + Date.now()
+        }
     }
 })
 

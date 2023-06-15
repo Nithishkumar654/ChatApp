@@ -29,21 +29,21 @@ function Login() {
 
   }
   return (
-    <div className='container d-flex bg-danger bg-opacity-10' style={{height: "650px"}}>
-      <div className='' style={{width: "50%"}}>
+    <div className='container d-flex flex-wrap justify-content-evenly' style={{minHeight: '650px'}} >
+      <div className='mt-auto mb-auto' style={{position: 'relative'}}>
         <img alt='' src='https://img.freepik.com/free-vector
         /dialogue-chat-clouds-speech-bubble-icon-from-lines-triangles-particle-style-design-low-poly-technology-devices
         -people-communication-concept-blue-background_587448-471.jpg?size=626&ext=jpg&ga=GA1.1.503943051.1686425803&semt=ais'
-        className='rounded-4' style={{position: "relative", top: "20%", left: "10%", width: '100%'}}/>
+        className='rounded-4 w-100' />
 
-        <h1 className='text-warning' style={{position: "absolute", top: "60%", left: "18%"}}>
+         <h1 className='text-warning' style={{position: 'absolute', top: '15rem', left: '5rem'}} >
           <i>C V M</i>
           <p className='lead ms-5 text-white'> - Cht Vth Me</p>
         </h1>
-        <img alt='' className = '' style={{width: "10%", position: "absolute", top: "32%", left: "13%", borderRadius: "50%"}} 
+        <img alt='' className = '' style={{position: 'absolute', borderRadius: '50%', top: '2rem', left: '2rem', width: '7rem'}}
         src = 'https://static.vecteezy.com/system/resources/previews/009/116/929/non_2x/cvm-logo-cvm-letter-cvm-letter-logo-design-initials-cvm-logo-linked-with-circle-and-uppercase-monogram-logo-cvm-typography-for-technology-business-and-real-estate-brand-vector.jpg' />
-      </div>
-      <div className='d-flex flex-column justify-content-center align-items-center' style={{width: "50%"}}>
+     </div> 
+      <div className='d-flex flex-column justify-content-center align-items-center mt-auto mb-auto'>
         <form onSubmit={handleSubmit(submitLogin)} className='text-center d-flex flex-column justify-content-center align-items-center'>
           <h1 className='display-5'> Login To <i>Cht</i></h1>
           {(err.length !== 0) && <p className='lead text-danger'>*{err}</p>}

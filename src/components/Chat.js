@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Button } from 'react-bootstrap'
-import {AiOutlineSearch} from 'react-icons/ai';
+import {AiOutlineSearch, AiFillCloseCircle} from 'react-icons/ai';
 import EmptyChat from './EmptyChat';
 import Conversation from './Conversation';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { CgProfile } from 'react-icons/cg'
+import EditProfile from './EditProfile';
 
 function Chat() {
 
@@ -12,6 +14,9 @@ function Chat() {
   let [person, showPerson] = useState({});
   let [host, setHost] = useState("")
   const navigate = useNavigate()
+  let [show, setShow] = useState(false)
+  let [message, setMessage] = useState("")
+  let [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
     
@@ -35,7 +40,7 @@ function Chat() {
     .then(res => setUserId(res.data.users))
     .catch(err => console.log(err))
   
-  },[])
+  },[showModal])
 
   function handleChange(event){
     axios.get('http://localhost:3500/user-api/get-users')
@@ -47,17 +52,28 @@ function Chat() {
     showPerson(obj)
   }
 
+  function handleShow(){
+    setShow(false)
+    setMessage("")
+  }
+
+
   return (
-    <div className='d-flex border border-dark' style={{height: "640px"}}>
-      <div style={{width: '35%'}} className = 'chats pt-2 border overflow-auto bg-secondary bg-opacity-10'>
-        <div className='ms-2'>
-          <AiOutlineSearch className='fs-2'/>
-          <input type = 'search' className= 'w-75 rounded ps-2' onChange={handleChange} placeholder='Search by userid..' />
+    <div className='d-flex' style={{height: "640px", position: 'relative'}}>
+      <div style={{width: '35%'}} className = 'chats pt-2 h-100 overflow-auto bg-secondary bg-opacity-10'>
+
+        <h1 className='lead fs-3 text-center m-2'> Welcome <i><b>{host}</b></i>..!!</h1>
+        <div className='ms-2 d-flex align-items-center mt-1'>
+          <div className='w-100'>
+            <AiOutlineSearch className='fs-3'/>
+            <input type = 'search' className= 'w-75 rounded ps-2' onChange={handleChange} placeholder='Search by userid..' />
+          </div>
+          <CgProfile className='me-2 fs-4' onClick={() => setShowModal(!showModal)} style={{cursor: 'pointer'}} />
         </div>
         <hr/>
         <p className='lead ms-2'>Your Chats</p>
         <hr className='w-50 ms-1 m-0'/>
-        <div>
+        <div className='' style={{position: 'relative'}}>
         {
           userids.map(obj => obj.userid !== host &&  
             <>
@@ -68,15 +84,26 @@ function Chat() {
             <hr className='ms-1 w-75 m-0' />
             </>
           )
-        }
+          }
         </div>
+
+        { show && 
+         <div className='d-inline d-flex p-0 bg-secondary' style={{position: 'absolute', bottom: '0', left: '1rem'}}>
+          <p className='lead text-warning me-2'> {message} </p>
+          <AiFillCloseCircle className='fs-4' onClick={handleShow} />
+         </div>
+        }
+
+
+        <EditProfile show = {showModal} setShow = {setShowModal} />
+
       </div>
 
 
       <div style={{width: '65%'}} className = 'conversations'>
 
         {
-          person.userid === undefined ? <EmptyChat /> : <Conversation person = {person} />
+          person.userid === undefined ? <EmptyChat /> : <Conversation setShow = {setShow} setMessage = {setMessage} person = {person} />
         }
       </div>
       

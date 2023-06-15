@@ -8,7 +8,7 @@ function RootLayout() {
 
       <NavigationBar/>
       
-      <div className='' style={{height: "640px"}}>
+      <div className='bg-danger bg-opacity-10' style={{minHeight: '650px'}}>
         <Outlet />
       </div>      
     </div>

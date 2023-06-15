@@ -20,9 +20,11 @@ mclient.connect('mongodb://127.0.0.1')
     const dbObj = dbRef.db('chatsdb')
     const usersCollectionObj = dbObj.collection('usersCollection')
     const conversationsCollectionObj = dbObj.collection('conversationsCollection')
+    const pdfCollectionObj = dbObj.collection('pdfCollection')
 
     app.set('usersCollectionObj', usersCollectionObj)
     app.set('conversationsCollectionObj', conversationsCollectionObj)
+    app.set('pdfCollectionObj', pdfCollectionObj)
 
     console.log('DB Connection Success..')
 })

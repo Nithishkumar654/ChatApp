@@ -92,13 +92,18 @@ function Footer({ person, setSend }) {
 
     obj.time = hrs + ':' + mins + ':' + secs
 
+    obj.fileType = file.name.slice(-3)
+
+    obj.fileName = file.name;
+
     let fd = new FormData()
 
     fd.append('details', JSON.stringify(obj))
 
     fd.append('photo', file)
 
-    axios.post('http://localhost:3500/conversation-api/send-photo', fd)
+    
+    axios.post('http://localhost:3500/conversation-api/send-file', fd)
     .then(res => {
       setSend(true)
       setValue("")
@@ -124,8 +129,9 @@ function Footer({ person, setSend }) {
           overlay={ 
           <Popover><EmojiPicker onEmojiClick={handleEmoji} /></Popover> }
         >
-          <Button className='btn text-dark bg-light bg-opacity-10 border border-light border-opacity-10 fs-4 p-0 d-inline' style={{borderRadius: '60%'}}>
-            <BsEmojiSunglasses className='fs-4 m-0'/></Button>
+          <div className='d-inline btn p-0 m-0 border border-none'>
+            <BsEmojiSunglasses style={{cursor: 'pointer'}} className='fs-4 ms-2 text-dark'/>
+          </div>
         </OverlayTrigger>
 
         <OverlayTrigger trigger={'click'} key={'top'} placement = {'top-start'} rootClose={true}
@@ -134,11 +140,12 @@ function Footer({ person, setSend }) {
               <input type='file' onInput={handleFile} />
             </Popover>
           }>
-          <label className='btn text-dark m-2 bg-light bg-opacity-10 border border-light border-opacity-10 fs-4 p-0 d-inline' style={{borderRadius: '60%'}}>
-            <GrAttachment className='fs-4 m-0'/></label>
+            <div className='d-inline'>
+              <GrAttachment style={{cursor: 'pointer'}} className='fs-4 ms-2 text-dark'/>
+            </div>
         </OverlayTrigger>
       </div>
-      <div className='border w-75 ms-1'>
+      <div className='border w-75 ms-3'>
         
         <input type='text' className='fs-6 ps-2 pt-1 pb-1 mt-2 w-100 rounded'
          style={{wordBreak: "break-word"}} placeholder='Type a Message...' value={value} disabled={disabled} onChange={handleChange}  />

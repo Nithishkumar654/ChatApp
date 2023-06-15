@@ -29,12 +29,14 @@ function Register() {
   }
 
   return (
-    <div className='container d-flex align-items- bg-danger bg-opacity-10 p-0' style={{height: "640px"}}>
+    <div className='container d-flex flex-wrap justify-content-around' style={{minHeight: "650px", position: 'relative'}}>
+      <div className='mt-auto mb-auto' style={{position: 'relative', width: '40rem'}}>
       <img alt='' src='https://cdn.dribbble.com/users/267404/screenshots/3713416/media/6a7e93dc6473c86476d748e82f917cea.png?compress=1&resize=800x600&vertical=center'
-      className='' style={{position: "relative", objectFit: "cover", height: "100%", width: "50%"}}
+      className='w-100 mt-auto' style={{borderRadius: '50%'}}
       />
-      <img alt='' style={{position: "absolute", width: "10%", borderRadius: "50%", top: "45%", left: "23%"}} className='' src='https://static.vecteezy.com/system/resources/previews/009/116/929/non_2x/cvm-logo-cvm-letter-cvm-letter-logo-design-initials-cvm-logo-linked-with-circle-and-uppercase-monogram-logo-cvm-typography-for-technology-business-and-real-estate-brand-vector.jpg' />
-      <div className='d-flex align-items-center justify-content-center' style={{width: "50%"}}>
+      <img alt='' style={{position: "absolute", width: '8rem', borderRadius: "50%", top: "11rem", left: "16rem"}} className='' src='https://static.vecteezy.com/system/resources/previews/009/116/929/non_2x/cvm-logo-cvm-letter-cvm-letter-logo-design-initials-cvm-logo-linked-with-circle-and-uppercase-monogram-logo-cvm-typography-for-technology-business-and-real-estate-brand-vector.jpg' />
+      </div>
+      <div className='d-flex align-items-center justify-content-center me-5' style={{position: 'relative'}}>
         <form className='d-flex flex-column' style={{position: ""}} onClick={handleSubmit(submitRegister)} >
           <h1 className='display-6 mb-5 text- text-center'> <u> Register Here </u> </h1>
           {err.length !== 0 && <p className='lead text-danger'>*{err}</p>}
@@ -53,7 +55,7 @@ function Register() {
           <NavLink onClick={() => setRepeatShow(!repeatShow)} className='mt-3 ms-2 nav-link pt-1'>{repeatShow ? <BiHide className='fs-4 m-0' />  :<BiShow className='fs-4 m-0' />}</NavLink>
           </div>
           <label className='mt-3 text-dark lead fs-5'>Upload your profile pic</label>
-          <input type='file' />
+          <input type='file' {...register('picture')} />
           <Button className='btn btn-success text-center m-auto mt-3' type='submit' style={{width: "35%"}} > Submit </Button>
         </form>
       </div>
