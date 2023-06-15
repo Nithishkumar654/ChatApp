@@ -3,10 +3,29 @@ const conversationsApp = exp.Router()
 const bcryptjs = require('bcryptjs')
 //const multerObj = require('./cloudinaryConfig')
 const jwt = require('jsonwebtoken')
+const fs = require('fs');
+const os = require('os');
+const path = require('path')
+const bodyParser = require('body-parser')
+const { ObjectId } = require('mongodb');
+
+const multer = require('multer')
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './uploads'); // Create a destination folder - ./uploads
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname); // Use the original filename
+  },
+});
+
+const multerObj = multer({storage})
 
 const expressAsyncHandler = require('express-async-handler')
 
 conversationsApp.use(exp.json())
+conversationsApp.use(bodyParser.json())
 
 conversationsApp.post('/get-messages', expressAsyncHandler( async(req, res) => {
     const conversationsCollectionObj = req.app.get('conversationsCollectionObj')
@@ -29,22 +48,6 @@ conversationsApp.post('/send-message', expressAsyncHandler( async(req, res) => {
 
 }))
 
-const fs = require('fs');
-
-const multer = require('multer')
-
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, './uploads'); // Set the destination folder where files will be stored temporarily
-    },
-    filename: (req, file, cb) => {
-      console.log(file)
-      cb(null, file.originalname); // Use the original filename
-    },
-  });
-
-const multerObj = multer({storage})
-
 conversationsApp.post('/send-file', multerObj.single('photo'), expressAsyncHandler( async(req, res) => {
     
     const conversationsCollectionObj = req.app.get('conversationsCollectionObj')
@@ -65,16 +68,11 @@ conversationsApp.post('/send-file', multerObj.single('photo'), expressAsyncHandl
 
 }))
 
-const os = require('os');
-const path = require('path')
-const bodyParser = require('body-parser')
-conversationsApp.use(bodyParser.json())
-const { ObjectId } = require('mongodb');
 
 conversationsApp.post('/download-file', expressAsyncHandler( async(req, res) => {
 
     const conversationsCollectionObj = req.app.get('conversationsCollectionObj')
-    console.log(req.body)
+  
     try{
 
         let id = req.body.id;

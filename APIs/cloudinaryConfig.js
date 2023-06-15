@@ -1,12 +1,13 @@
 const cloudinary = require('cloudinary').v2;
 const multer = require('multer')
+const dotenv = require('dotenv').config()
 
 const {CloudinaryStorage} = require('multer-storage-cloudinary')
 
 cloudinary.config({
-    cloud_name: "dwl3dxfac",
-    api_key: "427637792871644",
-    api_secret: "yZl92vIRYLgYsfwUNVGgiRp5ml8"
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET
 })
 
 
@@ -15,7 +16,6 @@ let clStorage = new CloudinaryStorage({
     params: {
         folder: 'chatfiles',
         public_id: (req, file) => {
-            console.log(file)
             file.fieldname + "-" + Date.now()
         }
     }

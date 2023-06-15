@@ -85,7 +85,6 @@ userApp.post('/sendemail', async(req, res) => {
     const email = req.body.email;
     const user = req.body.userid;
 
-    console.log(user, email)
 
     let dbUser = await usersCollectionObj.findOne({userid: user})
 
@@ -93,8 +92,6 @@ userApp.post('/sendemail', async(req, res) => {
         res.send({message: '*No Account Available with the given UserID.. \nRegister to Continue'})
         return;
     }
-
-    console.log(dbUser)
 
     if(email !== dbUser.email){
         res.send({message: '*Email Doesnot Match \nPlease Enter the corresponding Email of UserID'})
@@ -174,7 +171,6 @@ userApp.post('/profile-update', expressAsyncHandler( async(req, res) => {
         res.status(201).send({success: true, message: 'Profile Updated Successfully'})
     }
     catch(err){
-        console.log(err)
         res.status(400).send({message: 'Error while Updating Profile'})
     }
 }))
