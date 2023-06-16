@@ -3,6 +3,7 @@ const dotenv = require('dotenv').config()
 const app = exp()
 const path = require('path')
 app.use(exp.static(path.join(__dirname, './build')))
+const { MongoClient } = require('mongodb')
 
 const PORT = process.env.PORT || 3500
 app.listen(PORT, () => console.log('server listening on port 3500...'))
@@ -13,10 +14,16 @@ app.use('/user-api', userApp)
 const conversationsApp = require('./APIs/conversationsAPI')
 app.use('/conversation-api', conversationsApp)
 
-const mclient = require('mongodb').MongoClient;
+const MONGODB_URI = process.env.MONGODB_URI
+const client = new MongoClient(MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
+//const mclient = require('mongodb').MongoClient;
 
-mclient.connect('mongodb://127.0.0.1')
-.then(dbRef => {
+//mclient.connect('mongodb://127.0.0.1')
+client.connect()
+.then((dbRef) => {
     const dbObj = dbRef.db('chatsdb')
     const usersCollectionObj = dbObj.collection('usersCollection')
     const conversationsCollectionObj = dbObj.collection('conversationsCollection')
