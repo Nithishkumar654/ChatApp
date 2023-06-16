@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 function EditProfile({ show, setShow }) {
 
   
-  let {register, handleSubmit, formState: {errors}, setValue, getValues} = useForm();
+  let {register, setValue, getValues} = useForm();
   let [err, setErr] = useState("")
 
   function updateProfile(){

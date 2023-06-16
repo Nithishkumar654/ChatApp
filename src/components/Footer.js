@@ -5,12 +5,12 @@ import { AiOutlineSend } from 'react-icons/ai'
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import EmojiPicker from 'emoji-picker-react'
-import { Button, DropdownButton, OverlayTrigger, Popover } from 'react-bootstrap';
+import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
 import { GiCancel } from 'react-icons/gi'
 
 function Footer({ person, setSend }) {
 
-  let {register, handleSubmit} = useForm();
+  let {handleSubmit} = useForm();
   let [host, setHost] = useState("")
   let [show, setShow] = useState(false)
   let [value, setValue] = useState("")

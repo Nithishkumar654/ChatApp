@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { Button } from 'react-bootstrap'
 import {AiOutlineSearch, AiFillCloseCircle} from 'react-icons/ai';
 import EmptyChat from './EmptyChat';
 import Conversation from './Conversation';

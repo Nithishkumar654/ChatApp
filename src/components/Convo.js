@@ -71,10 +71,10 @@ function Convo({ person, send, setSend, setShow, setMessage }) {
                 <div className='d-flex me-1 ms-1' style={{position: 'relative'}}>
                 <div className='d-flex flex-wrap justify-content-between' style={{position: 'relative'}}> 
                 <div style={{position: 'relative'}}>
-                  {obj.fileType === 'pdf' && <img src={pdf} style={{position: 'relative', width: '50px', height: '50px'}} /> }
-                  {obj.fileType === 'png' && <img src={png} style={{position: 'relative', width: '50px', height: '50px'}} /> }
-                  {obj.fileType === 'jpg' && <img src={jpg} className='' style={{position: 'relative', width: '50px', height: '50px'}} /> }
-                  {obj.fileType === 'lsx' && <img src={lsx} style={{position: 'relative', width: '50px', height: '50px'}} /> }
+                  {obj.fileType === 'pdf' && <img alt='' src={pdf} style={{position: 'relative', width: '50px', height: '50px'}} /> }
+                  {obj.fileType === 'png' && <img alt='' src={png} style={{position: 'relative', width: '50px', height: '50px'}} /> }
+                  {obj.fileType === 'jpg' && <img alt='' src={jpg} className='' style={{position: 'relative', width: '50px', height: '50px'}} /> }
+                  {obj.fileType === 'lsx' && <img alt='' src={lsx} style={{position: 'relative', width: '50px', height: '50px'}} /> }
                 
                     <IoMdDownload onClick={() => handleDownload(obj)} className='fs-3 text-dark'
                         style={{position: 'absolute', bottom: '1rem', left: '0', borderRadius: '50%', cursor: 'pointer'}} />
@@ -101,10 +101,10 @@ function Convo({ person, send, setSend, setShow, setMessage }) {
                 <div className='d-flex ms-1 me-1' style={{position: 'relative'}}>
                 <div className='d-flex flex-wrap justify-content-between' style={{position: 'relative'}}>
                   <div style={{position: 'relative'}}>
-                  {obj.fileType === 'pdf' && <img src={pdf} style={{position: 'relative', width: '50px', height: '50px'}} /> }
-                  {obj.fileType === 'png' && <img src={png} style={{position: 'relative', width: '50px', height: '50px'}} /> }
-                  {obj.fileType === 'jpg' && <img src={jpg} style={{position: 'relative', width: '50px', height: '50px'}} /> }
-                  {obj.fileType === 'lsx' && <img src={lsx} style={{position: 'relative', width: '50px', height: '50px'}} /> }
+                  {obj.fileType === 'pdf' && <img alt='' src={pdf} style={{position: 'relative', width: '50px', height: '50px'}} /> }
+                  {obj.fileType === 'png' && <img alt='' src={png} style={{position: 'relative', width: '50px', height: '50px'}} /> }
+                  {obj.fileType === 'jpg' && <img alt='' src={jpg} style={{position: 'relative', width: '50px', height: '50px'}} /> }
+                  {obj.fileType === 'lsx' && <img alt='' src={lsx} style={{position: 'relative', width: '50px', height: '50px'}} /> }
                     
                   <IoMdDownload onClick={() => handleDownload(obj)} className='fs-3 text-dark'
                      style={{position: 'absolute', bottom: '1rem', left: '0', borderRadius: '50%', cursor: 'pointer'}}  /> 
