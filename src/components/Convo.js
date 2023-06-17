@@ -61,7 +61,7 @@ function Convo({ person, send, setSend, setShow, setMessage }) {
 
   return (
     <div className = 'd-flex flex-column overflow-y-scroll pb-2 bg-white' style = {{height: "82%"}}>
-      <div ref={scrollRef} className='mt-auto'>
+      <div className='mt-auto'>
         {
           messages && messages.map(obj => 
             obj.senderId === host ?
