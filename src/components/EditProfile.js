@@ -13,7 +13,7 @@ function EditProfile({ show, setShow }) {
 
     let updatedProfile = getValues()
 
-    axios.post('http://localhost:3500/user-api/profile-update', updatedProfile)
+    axios.post('https://chtvthme.onrender.com/user-api/profile-update', updatedProfile)
     .then(res => {
         if(res.data.success === true){
             setErr("")
@@ -29,7 +29,7 @@ function EditProfile({ show, setShow }) {
     
     let host = localStorage.getItem('user')
    
-    axios.get('http://localhost:3500/user-api/get-users')
+    axios.get('https://chtvthme.onrender.com/user-api/get-users')
     .then(async(res) => {
         let user = await res.data.users.filter(obj => (obj.userid === host))
         user = user[0]
