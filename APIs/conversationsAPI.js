@@ -84,9 +84,11 @@ conversationsApp.post('/download-file', expressAsyncHandler( async(req, res) => 
         
         console.log(fileData)
 
-        const downloadPath = path.join(os.homedir(), 'Downloads', fileData.fileName);
-
         const imageBuffer = Buffer.from(fileData.image, 'base64')
+        console.log(imageBuffer)
+        const downloadPath = path.join(os.homedir(), 'Downloads', fileData.fileName);
+        console.log(downloadPath)
+       
 
         fs.writeFileSync(downloadPath, imageBuffer);
         res.status(200).send({success: true, message: 'File Downloaded Successfully'})
