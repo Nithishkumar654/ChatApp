@@ -92,8 +92,6 @@ function Footer({ person, setSend }) {
 
     obj.time = hrs + ':' + mins + ':' + secs
 
-    obj.fileType = file.name.slice(-3)
-
     obj.fileName = file.name;
 
     let fd = new FormData()

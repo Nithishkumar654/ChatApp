@@ -1,11 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react'
 import { IoMdDownload } from 'react-icons/io'
-
-const pdf = 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/1200px-PDF_file_icon.svg.png'
-const png = 'https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE='
-const jpg = 'https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE='
-const lsx = 'https://windowsfileviewer.com/images/types/xlsx.png'
+import { AiFillFileText, AiFillFilePpt, AiFillFileWord, AiFillFileImage, AiFillFilePdf, AiFillFileZip, AiFillFileExcel, AiFillFileUnknown } from 'react-icons/ai'
 
 function Convo({ person, send, setSend, setShow, setMessage }) {
 
@@ -58,7 +54,6 @@ function Convo({ person, send, setSend, setShow, setMessage }) {
           messages && messages.map(obj => 
             obj.senderId === host ?
             <div className='ms-auto pe-3 mb-1 d-flex' style={{width: "60%", wordBreak:"break-word"}}>
-              
               <div className='d-inline-block ms-auto fs-6 lead m-0 bg-success pt-1 pb-1 rounded text-white'
                   style={{position: 'relative'}}> 
                 { obj.message ?
@@ -71,11 +66,19 @@ function Convo({ person, send, setSend, setShow, setMessage }) {
                 <div className='d-flex me-1 ms-1' style={{position: 'relative'}}>
                 <div className='d-flex flex-wrap justify-content-between' style={{position: 'relative'}}> 
                 <div style={{position: 'relative'}}>
-                  {obj.fileType === 'pdf' && <img alt='' src={pdf} style={{position: 'relative', width: '50px', height: '50px'}} /> }
-                  {obj.fileType === 'png' && <img alt='' src={png} style={{position: 'relative', width: '50px', height: '50px'}} /> }
-                  {obj.fileType === 'jpg' && <img alt='' src={jpg} className='' style={{position: 'relative', width: '50px', height: '50px'}} /> }
-                  {obj.fileType === 'lsx' && <img alt='' src={lsx} style={{position: 'relative', width: '50px', height: '50px'}} /> }
-                
+                  {
+                  
+                  obj.fileType === 'application/pdf' ? <AiFillFilePdf style={{position: 'relative', width: '50px', height: '50px'}} /> :
+                  (obj.fileType.includes('image') ? <AiFillFileImage style={{position: 'relative', width: '50px', height: '50px'}} /> :
+                  (obj.fileType.includes('application/vnd') ? <AiFillFileExcel style={{position: 'relative', width: '50px', height: '50px'}}/> :
+                  (obj.fileType.includes('zip') ? <AiFillFileZip style={{position: 'relative', width: '50px', height: '50px'}} /> :
+                  (obj.fileType.includes('text/plain') ? <AiFillFileText style={{position: 'relative', width: '50px', height: '50px'}} /> :
+                  (obj.fileType.includes('application/powerpoint') ? <AiFillFilePpt style={{position: 'relative', width: '50px', height: '50px'}} /> :
+                  (obj.fileType.includes('application/msword') ? <AiFillFileWord style={{position: 'relative', width: '50px', height: '50px'}} /> :
+                   <AiFillFileUnknown style={{position: 'relative', width: '50px', height: '50px'}} />
+                  ))))))
+
+                  }
                     <IoMdDownload onClick={() => handleDownload(obj)} className='fs-3 text-dark'
                         style={{position: 'absolute', bottom: '1rem', left: '0', borderRadius: '50%', cursor: 'pointer'}} />
                   </div>
@@ -101,11 +104,19 @@ function Convo({ person, send, setSend, setShow, setMessage }) {
                 <div className='d-flex ms-1 me-1' style={{position: 'relative'}}>
                 <div className='d-flex flex-wrap justify-content-between' style={{position: 'relative'}}>
                   <div style={{position: 'relative'}}>
-                  {obj.fileType === 'pdf' && <img alt='' src={pdf} style={{position: 'relative', width: '50px', height: '50px'}} /> }
-                  {obj.fileType === 'png' && <img alt='' src={png} style={{position: 'relative', width: '50px', height: '50px'}} /> }
-                  {obj.fileType === 'jpg' && <img alt='' src={jpg} style={{position: 'relative', width: '50px', height: '50px'}} /> }
-                  {obj.fileType === 'lsx' && <img alt='' src={lsx} style={{position: 'relative', width: '50px', height: '50px'}} /> }
-                    
+                  {
+                  
+                  obj.fileType === 'application/pdf' ? <AiFillFilePdf style={{position: 'relative', width: '50px', height: '50px'}} /> :
+                  (obj.fileType.includes('image') ? <AiFillFileImage style={{position: 'relative', width: '50px', height: '50px'}} /> :
+                  (obj.fileType.includes('application/vnd') ? <AiFillFileExcel style={{position: 'relative', width: '50px', height: '50px'}}/> :
+                  (obj.fileType.includes('zip') ? <AiFillFileZip style={{position: 'relative', width: '50px', height: '50px'}} /> :
+                  (obj.fileType.includes('text/plain') ? <AiFillFileText style={{position: 'relative', width: '50px', height: '50px'}} /> :
+                  (obj.fileType.includes('application/powerpoint') ? <AiFillFilePpt style={{position: 'relative', width: '50px', height: '50px'}} /> :
+                  (obj.fileType.includes('application/msword') ? <AiFillFileWord style={{position: 'relative', width: '50px', height: '50px'}} /> :
+                   <AiFillFileUnknown style={{position: 'relative', width: '50px', height: '50px'}} />
+                  ))))))
+
+                  }
                   <IoMdDownload onClick={() => handleDownload(obj)} className='fs-3 text-dark'
                      style={{position: 'absolute', bottom: '1rem', left: '0', borderRadius: '50%', cursor: 'pointer'}}  /> 
                   </div>

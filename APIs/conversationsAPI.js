@@ -13,7 +13,7 @@ const multer = require('multer')
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, './uploads'); // Create a destination folder - ./uploads
+    cb(null, os.tmpdir()); // Create a destination folder - temporary folder
   },
   filename: (req, file, cb) => {
     cb(null, file.originalname); // Use the original filename
@@ -52,6 +52,8 @@ conversationsApp.post('/send-file', multerObj.single('photo'), expressAsyncHandl
     
     const conversationsCollectionObj = req.app.get('conversationsCollectionObj')
     const newMessage = JSON.parse(req.body.details)
+
+    newMessage.fileType = req.file.mimetype;
 
     fs.readFile(req.file.path, async(err, data) => {
         if (err) {
