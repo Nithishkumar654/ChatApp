@@ -19,10 +19,7 @@ const client = new MongoClient(MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
-//const mclient = require('mongodb').MongoClient;
 
-
-//mclient.connect('mongodb://127.0.0.1')
 client.connect()
 .then((dbRef) => {
     const dbObj = dbRef.db('chatsdb')
@@ -31,6 +28,7 @@ client.connect()
 
     app.set('usersCollectionObj', usersCollectionObj)
     app.set('conversationsCollectionObj', conversationsCollectionObj)
+    app.set('dbObj', dbObj);
 
     console.log('DB Connection Success..')
 })

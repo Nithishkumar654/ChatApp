@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IoMdDownload } from 'react-icons/io'
 import { AiFillFileText, AiFillFilePpt, AiFillFileWord, AiFillFileImage, AiFillFilePdf, AiFillFileZip, AiFillFileExcel, AiFillFileUnknown } from 'react-icons/ai'
 
@@ -8,15 +8,13 @@ function Convo({ person, send, setSend, setShow, setMessage }) {
   let [messages, setMessages] = useState();
   let [host, setHost] = useState("")
 
-  const scrollRef = useRef(null);
-
   useEffect(() => {
 
     setHost(localStorage.getItem('user'))
 
     let hosting = localStorage.getItem('user')
     
-    axios.post('https://chtvthme.onrender.com/conversation-api/get-messages', {host: hosting, person: person.userid})
+    axios.post('http://localhost:3500/conversation-api/get-messages', {host: hosting, person: person.userid})
     .then((response) => {
       
       setMessages(response.data.chat)
@@ -32,12 +30,25 @@ function Convo({ person, send, setSend, setShow, setMessage }) {
   
   function handleDownload(obj){
 
-    console.log(obj, obj._id)
-    axios.post('https://chtvthme.onrender.com/conversation-api/download-file', {id: obj._id})
+    
+    axios.post('http://localhost:3500/conversation-api/download-file', obj)
     .then(res => {
 
-      setShow(true)
-      setMessage(res.data.message)
+      const url = window.URL.createObjectURL(new Blob([res.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', obj.fileName);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      if(res.status === 200){
+        setShow(true)
+        setMessage('File Downloaded Successfully..')
+      }else{
+        setShow(true)
+        setMessage(res.data.message)
+      }
       
     })
     .catch(err => {

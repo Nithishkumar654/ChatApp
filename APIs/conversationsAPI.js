@@ -1,23 +1,23 @@
 const exp = require('express')
 const conversationsApp = exp.Router()
-const bcryptjs = require('bcryptjs')
 //const multerObj = require('./cloudinaryConfig')
-const jwt = require('jsonwebtoken')
-const fs = require('fs');
-const os = require('os');
-const path = require('path')
+const mongo = require('mongodb')
+const Grid = require('gridfs-stream');
 const bodyParser = require('body-parser')
-const { ObjectId } = require('mongodb');
+const dotenv = require('dotenv');
+const { GridFsStorage } = require('multer-gridfs-storage');
+const url = process.env.DB;
+
 
 const multer = require('multer')
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, os.tmpdir()); // Create a destination folder - temporary folder
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname); // Use the original filename
-  },
+const storage = new GridFsStorage({ 
+  url: url,
+  file: (req, file) => {
+    return {
+      filename: 'file-' + Date.now() + '-' + file.originalname
+    }
+  }
 });
 
 const multerObj = multer({storage})
@@ -48,47 +48,42 @@ conversationsApp.post('/send-message', expressAsyncHandler( async(req, res) => {
 
 }))
 
-conversationsApp.post('/send-file', multerObj.single('photo'), expressAsyncHandler( async(req, res) => {
+conversationsApp.post('/send-file', multerObj.single('file'), expressAsyncHandler( async(req, res) => {
     
     const conversationsCollectionObj = req.app.get('conversationsCollectionObj')
+
     const newMessage = JSON.parse(req.body.details)
 
     newMessage.fileType = req.file.mimetype;
 
-    fs.readFile(req.file.path, async(err, data) => {
-        if (err) {
-          console.error('Error reading image file:', err);
-          return res.status(500).send('Error reading image file');
-        }
+    newMessage.filename = req.file.filename;
+
+    try{
+
+      await conversationsCollectionObj.insertOne(newMessage)
+      res.status(200).send({success: true, message: 'File Sent..'})
+
+    }catch(err){
+      res.status(400).send({message: 'Error occured while Sending File..'})
+    }
     
-        newMessage.image = data.toString('base64');
-
-        let response = await conversationsCollectionObj.insertOne(newMessage)
-
-        res.status(200).send({success: true, message: 'Message Sent'})
-      });
-
 }))
 
 
 conversationsApp.post('/download-file', expressAsyncHandler( async(req, res) => {
 
-    const conversationsCollectionObj = req.app.get('conversationsCollectionObj')
-  
+    const dbObj = req.app.get('dbObj')
+    const bucket = new mongo.GridFSBucket(dbObj, { bucketName: 'fs'});
+    
+    let gfs = Grid(dbObj, mongo);
+    gfs.collection('fs')
 
     try{
+        const file = await gfs.files.findOne({ filename: req.body.filename })
 
-        console.log(req.body)
-        let id = req.body.id;
-        let fileData = await conversationsCollectionObj.findOne({_id: new ObjectId(id)});
+        let readstream = bucket.openDownloadStream(file._id);
+        readstream.pipe(res);
         
-        console.log(fileData)
-
-        const downloadPath = path.join(os.homedir(), 'Downloads', fileData.fileName);
-
-        const imageBuffer = Buffer.from(fileData.image, 'base64')
-
-        fs.writeFileSync(downloadPath, imageBuffer);
         res.status(200).send({success: true, message: 'File Downloaded Successfully'})
     
     }
