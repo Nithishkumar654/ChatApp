@@ -16,7 +16,7 @@ function Convo({ person, send, setSend, setShow, setMessage }) {
 
     let hosting = localStorage.getItem('user')
     
-    axios.post('https://chtvthme.onrender.com/conversation-api/get-messages', {host: hosting, person: person.userid})
+    axios.post('http://chtvthme.onrender.com/conversation-api/get-messages', {host: hosting, person: person.userid})
     .then((response) => {
       
       setMessages(response.data.chat)
@@ -32,7 +32,7 @@ function Convo({ person, send, setSend, setShow, setMessage }) {
   
   function handleDownload(obj){
 
-    axios.post('https://chtvthme.onrender.com/conversation-api/download-file', {id: obj._id})
+    axios.post('http://chtvthme.onrender.com/conversation-api/download-file', {id: obj._id})
     .then(res => {
 
       setShow(true)

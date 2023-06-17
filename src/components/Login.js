@@ -14,7 +14,7 @@ function Login() {
 
   function submitLogin(obj){
 
-    axios.post('https://chtvthme.onrender.com/user-api/login', obj)
+    axios.post('http://chtvthme.onrender.com/user-api/login', obj)
     .then(res => {
       if(res.data.success === true){
         localStorage.setItem('token', res.data.token)

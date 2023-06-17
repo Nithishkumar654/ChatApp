@@ -19,7 +19,7 @@ function ForgotPass() {
 
   function submitEmail(obj){
     setUser(obj.userid)
-    axios.post('https://chtvthme.onrender.com/user-api/sendemail', obj)
+    axios.post('http://chtvthme.onrender.com/user-api/sendemail', obj)
     .then(res => {
         if(res.data.success === true){
             setErr("")
@@ -38,7 +38,7 @@ function ForgotPass() {
 
     obj.token = localStorage.getItem('otpToken')
     obj.hashedOtp = localStorage.getItem('hashedOtp')
-    axios.post('https://chtvthme.onrender.com/user-api/verifyotp', obj)
+    axios.post('http://chtvthme.onrender.com/user-api/verifyotp', obj)
     .then(res => {
         if(res.data.success === true){
             setErr("")
@@ -52,7 +52,7 @@ function ForgotPass() {
 
   function submitNewPass(obj){
     obj.userid = user;
-    axios.post('https://chtvthme.onrender.com/user-api/update-password', obj)
+    axios.post('http://chtvthme.onrender.com/user-api/update-password', obj)
     .then(res => {
         if(res.data.success===true){
             alert(res.data.message)
@@ -67,7 +67,7 @@ function ForgotPass() {
         <img alt='' src='https://cdn.dribbble.com/users/267404/screenshots/3713416/media/6a7e93dc6473c86476d748e82f917cea.png?compress=1&resize=800x600&vertical=center'
       className='' style={{position: "relative", objectFit: "cover", height: "100%", width: "50%"}}
       />
-      <img alt='' style={{position: "absolute", width: "10%", borderRadius: "50%", top: "45%", left: "23%"}} className='' src='https://static.vecteezy.com/system/resources/previews/009/116/929/non_2x/cvm-logo-cvm-letter-cvm-letter-logo-design-initials-cvm-logo-linked-with-circle-and-uppercase-monogram-logo-cvm-typography-for-technology-business-and-real-estate-brand-vector.jpg' />
+      <img alt='' style={{position: "absolute", width: "10%", borderRadius: "50%", top: "45%", left: "23%"}} className='' src='http://static.vecteezy.com/system/resources/previews/009/116/929/non_2x/cvm-logo-cvm-letter-cvm-letter-logo-design-initials-cvm-logo-linked-with-circle-and-uppercase-monogram-logo-cvm-typography-for-technology-business-and-real-estate-brand-vector.jpg' />
       <div className='d-flex flex-column justify-content-center align-items-center w-100'>
         {err.length !== 0 && <p className='lead text-danger'>{err}</p>}
         {email && <form className='d-flex flex-column' onSubmit={handleSubmit(submitEmail)}>
