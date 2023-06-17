@@ -32,6 +32,7 @@ function Convo({ person, send, setSend, setShow, setMessage }) {
   
   function handleDownload(obj){
 
+    console.log(obj, obj._id)
     axios.post('https://chtvthme.onrender.com/conversation-api/download-file', {id: obj._id})
     .then(res => {
 

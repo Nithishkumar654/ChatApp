@@ -75,11 +75,14 @@ conversationsApp.post('/download-file', expressAsyncHandler( async(req, res) => 
 
     const conversationsCollectionObj = req.app.get('conversationsCollectionObj')
   
+
     try{
 
+        console.log(req.body)
         let id = req.body.id;
         let fileData = await conversationsCollectionObj.findOne({_id: new ObjectId(id)});
         
+        console.log(fileData)
 
         const downloadPath = path.join(os.homedir(), 'Downloads', fileData.fileName);
 
