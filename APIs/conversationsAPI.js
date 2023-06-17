@@ -91,6 +91,7 @@ conversationsApp.post('/download-file', expressAsyncHandler( async(req, res) => 
        
 
         fs.writeFileSync(downloadPath, imageBuffer);
+        console.log('success');
         res.status(200).send({success: true, message: 'File Downloaded Successfully'})
     
     }
