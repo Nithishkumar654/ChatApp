@@ -17,7 +17,7 @@ function Register() {
 
   function submitRegister(obj){
     
-    axios.post('http://localhost:3500/user-api/register', obj)
+    axios.post('https://chtvthme.onrender.com/user-api/register', obj)
     .then(res => {
       if(res.data.success === true){
         navigate('/login')      
