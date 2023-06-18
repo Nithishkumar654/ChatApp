@@ -19,7 +19,7 @@ function ForgotPass() {
 
   function submitEmail(obj){
     setUser(obj.userid)
-    axios.post('http://localhost:3500/user-api/sendemail', obj)
+    axios.post('https://chtvthme.onrender.com/user-api/sendemail', obj)
     .then(res => {
         if(res.data.success === true){
             setErr("")
@@ -38,7 +38,7 @@ function ForgotPass() {
 
     obj.token = localStorage.getItem('otpToken')
     obj.hashedOtp = localStorage.getItem('hashedOtp')
-    axios.post('http://localhost:3500/user-api/verifyotp', obj)
+    axios.post('https://chtvthme.onrender.com/user-api/verifyotp', obj)
     .then(res => {
         if(res.data.success === true){
             setErr("")
@@ -52,7 +52,7 @@ function ForgotPass() {
 
   function submitNewPass(obj){
     obj.userid = user;
-    axios.post('http://localhost:3500/user-api/update-password', obj)
+    axios.post('https://chtvthme.onrender.com/user-api/update-password', obj)
     .then(res => {
         if(res.data.success===true){
             alert(res.data.message)
