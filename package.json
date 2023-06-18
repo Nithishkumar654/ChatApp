@@ -36,7 +36,7 @@
   },
   "scripts": {
     "start": "nodemon server.js",
-    "build": "react-scripts build",
+    "build": "npm install && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -57,5 +57,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "homepage": "chtvthme.com"
 }
