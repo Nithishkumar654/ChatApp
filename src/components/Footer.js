@@ -7,6 +7,7 @@ import axios from 'axios';
 import EmojiPicker from 'emoji-picker-react'
 import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
 import { GiCancel } from 'react-icons/gi'
+import Spinner from 'react-bootstrap/Spinner';
 
 function Footer({ person, setSend }) {
 
@@ -16,9 +17,11 @@ function Footer({ person, setSend }) {
   let [value, setValue] = useState("")
   let [disabled, setDisabled] = useState(false)
   let [file, setFile] = useState(null)
+  let [spin, setSpin] = useState(false)
 
   function submitMessage(){
 
+    setSpin(true)
     let obj = {}
     value = value.trimStart()
     
@@ -43,11 +46,12 @@ function Footer({ person, setSend }) {
     obj.time = hrs + ':' + mins + ':' + secs
     
     if(value.length !== 0){
-      axios.post('https://chtvthme.onrender.com/conversation-api/send-message', obj)
+      axios.post('http://localhost:3500/conversation-api/send-message', obj)
       .then(res => {
         
         setSend(true)
         setValue("")
+        setSpin(false)
       })
       .catch(err => console.log(err.message))
     }else{
@@ -72,6 +76,7 @@ function Footer({ person, setSend }) {
   function submitFile(){
 
     let obj = {}
+    setSpin(true)
 
     obj.senderId = host;
     obj.receiverId = person.userid;
@@ -101,10 +106,11 @@ function Footer({ person, setSend }) {
     fd.append('file', file)
 
     
-    axios.post('https://chtvthme.onrender.com/conversation-api/send-file', fd)
+    axios.post('http://localhost:3500/conversation-api/send-file', fd)
     .then(res => {
       setSend(true)
       setValue("")
+      setSpin(false)
       setDisabled(false)
     })
     .catch(err => console.log(err.message))
@@ -151,13 +157,29 @@ function Footer({ person, setSend }) {
       </div>
       {
       disabled === false ?
-        <Button className='btn btn-success pt-0 pb-1 mt-2 ms-2' onClick={submitMessage}>
-        <AiOutlineSend className='fs-6' /></Button> :
+        (spin ? 
+          <Button className='btn btn-success pt-0 pb-1 mt-2 ms-2' disabled>
+              <Spinner animation='border' variant='dark' size='sm'/>
+          </Button> 
+        :
+          <Button className='btn btn-success pt-0 pb-1 mt-2 ms-2' onClick={submitMessage}>
+          <AiOutlineSend className='fs-6' />
+          </Button>
+        )
+        :
         <>
+          {spin ?
+            <Button className='btn btn-success pt-0 pb-1 mt-2 ms-2' disabled>
+              <Spinner animation='border' variant='dark' size='sm'/>
+          </Button> :
+          <>
           <Button className='btn btn-success pt-0 pb-1 mt-2 ms-2' onClick={submitFile}>
-          <AiOutlineSend className='fs-6' /></Button>
+            <AiOutlineSend className='fs-6' />
+          </Button>
           <Button className='btn btn-secondary pt-0 pb-1 mt-2 ms-2' onClick={cancelFile}>
           <GiCancel className='fs-6' /></Button>
+          </>
+          }
         </>
       }
     </form>

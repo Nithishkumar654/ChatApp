@@ -2,37 +2,48 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { IoMdDownload } from 'react-icons/io'
 import { AiFillFileText, AiFillFilePpt, AiFillFileWord, AiFillFileImage, AiFillFilePdf, AiFillFileZip, AiFillFileExcel, AiFillFileUnknown } from 'react-icons/ai'
+import { Spinner } from 'react-bootstrap';
 
 function Convo({ person, send, setSend, setShow, setMessage }) {
 
   let [messages, setMessages] = useState();
   let [host, setHost] = useState("")
+  let [isLoaded, setIsLoaded] = useState(true)
 
   useEffect(() => {
 
     setHost(localStorage.getItem('user'))
+    setIsLoaded(true)
 
     let hosting = localStorage.getItem('user')
     
-    axios.post('https://chtvthme.onrender.com/conversation-api/get-messages', {host: hosting, person: person.userid})
+    axios.post('http://localhost:3500/conversation-api/get-messages', {host: hosting, person: person.userid})
     .then((response) => {
       
       setMessages(response.data.chat)
       setShow(false)
       setMessage("")
       setSend(false)
+      setIsLoaded(false)
       
     })
     .catch(err => console.log(err.message))
 
   }, [send, person])
 
+
+  if(isLoaded){
+    return <div className='bg-white d-flex' style = {{height: "82%"}}>
+      <Spinner className='m-auto' animation="border" variant="primary" />
+        </div>
+  }
+
   
   const handleDownload = async(obj) => {
 
     try{
     
-      let response =  await axios.post('https://chtvthme.onrender.com/conversation-api/download-file', obj, {responseType: 'blob'})
+      let response =  await axios.post('http://localhost:3500/conversation-api/download-file', obj, {responseType: 'blob'})
 
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement('a');
@@ -55,9 +66,9 @@ function Convo({ person, send, setSend, setShow, setMessage }) {
 
   return (
     <div className = 'd-flex flex-column overflow-y-scroll pb-2 bg-white' style = {{height: "82%"}}>
-      <div className='mt-auto'>
+      {messages.length!==0 ? <div className='mt-auto'>
         {
-          messages && messages.map(obj => 
+           messages.map(obj => 
             obj.senderId === host ?
             <div className='ms-auto pe-3 mb-1 d-flex' style={{width: "60%", wordBreak:"break-word"}}>
               <div className='d-inline-block ms-auto fs-6 lead m-0 bg-success pt-1 pb-1 rounded text-white'
@@ -134,9 +145,13 @@ function Convo({ person, send, setSend, setShow, setMessage }) {
                 }
             </div>
             </div>
-          )
-        }
+          )}
         </div>
+        :
+        
+          <p className='lead text-secondary m-auto'> Chat is Empty </p>
+      
+      }
       </div>
   )
 }
