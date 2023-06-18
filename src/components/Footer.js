@@ -151,12 +151,12 @@ function Footer({ person, setSend }) {
       </div>
       {
       disabled === false ?
-        <Button className='btn btn-success pt-0 pb-1 mt-2 ms-2' onClick={submitMessage}>
+        <Button className='btn btn-success pt-0 pb-1 mt-2 ms-2 me-1' onClick={submitMessage}>
         <AiOutlineSend className='fs-6' /></Button> :
         <>
           <Button className='btn btn-success pt-0 pb-1 mt-2 ms-2' onClick={submitFile}>
           <AiOutlineSend className='fs-6' /></Button>
-          <Button className='btn btn-secondary pt-0 pb-1 mt-2 ms-2' onClick={cancelFile}>
+          <Button className='btn btn-secondary pt-0 pb-1 mt-2 ms-2 me-1' onClick={cancelFile}>
           <GiCancel className='fs-6' /></Button>
         </>
       }
