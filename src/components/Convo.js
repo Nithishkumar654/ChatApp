@@ -13,7 +13,6 @@ function Convo({ person, send, setSend, setShow, setMessage }) {
   useEffect(() => {
 
     setHost(localStorage.getItem('user'))
-    setIsLoaded(true)
 
     let hosting = localStorage.getItem('user')
     
@@ -31,6 +30,9 @@ function Convo({ person, send, setSend, setShow, setMessage }) {
 
   }, [send, person])
 
+  useEffect(() => {
+    setIsLoaded(true)
+  }, [person])
 
   if(isLoaded){
     return <div className='bg-white d-flex' style = {{height: "82%"}}>
