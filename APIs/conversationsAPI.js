@@ -13,6 +13,10 @@ const multer = require('multer')
 
 const storage = new GridFsStorage({ 
   url: url,
+  options: {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
   file: (req, file) => {
     return {
       filename: 'file-' + Date.now() + '-' + file.originalname
@@ -81,11 +85,12 @@ conversationsApp.post('/download-file', expressAsyncHandler( async(req, res) => 
     try{
         const file = await gfs.files.findOne({ filename: req.body.filename })
 
+        res.set('Content-Type', file.contentType)
+        res.set('Content-Disposition', `attachment; filename = ${file.filename}`)
+
         let readstream = bucket.openDownloadStream(file._id);
         readstream.pipe(res);
-        
-        res.status(200).send({success: true, message: 'File Downloaded Successfully'})
-    
+
     }
     catch(err){
         res.status(400).send({message: 'Error while Downloading the file.. Consider re-downloading or re-sending..'})

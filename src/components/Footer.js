@@ -121,14 +121,14 @@ function Footer({ person, setSend }) {
     setShow(false)
   }, [])
   return (
-    <form className='footer d-flex align-items-center bg-dark bg-opacity-10' style={{height: '10%'}} onSubmit={handleSubmit(submitMessage)}>
-      <div className='emojiAndFile mt-1 ms-4'>
+    <form className='footer d-flex align-items-center justify-content-center bg-dark bg-opacity-10' style={{height: '10%'}} onSubmit={handleSubmit(submitMessage)}>
+      <div className='emojiAndFile mt-1 ms-4 d-flex'>
         <OverlayTrigger trigger={'click'} key={'top'} placement = {'top'} rootClose={true}
           overlay={ 
           <Popover><EmojiPicker onEmojiClick={handleEmoji} /></Popover> }
         >
-          <div className='d-inline btn p-0 m-0 border border-none'>
-            <BsEmojiSunglasses style={{cursor: 'pointer'}} className='fs-4 ms-2 text-dark'/>
+          <div className='btn p-0 m-0 border border-none'>
+            <BsEmojiSunglasses style={{cursor: 'pointer'}} className='fs-4 ms-1 text-dark'/>
           </div>
         </OverlayTrigger>
 
@@ -138,8 +138,8 @@ function Footer({ person, setSend }) {
               <input type='file' onInput={handleFile} />
             </Popover>
           }>
-            <div className='d-inline'>
-              <GrAttachment style={{cursor: 'pointer'}} className='fs-4 ms-2 text-dark'/>
+            <div className=''>
+              <GrAttachment style={{cursor: 'pointer'}} className='fs-4 ms-1 text-dark'/>
             </div>
         </OverlayTrigger>
       </div>

@@ -28,33 +28,27 @@ function Convo({ person, send, setSend, setShow, setMessage }) {
   }, [send, person])
 
   
-  function handleDownload(obj){
+  const handleDownload = async(obj) => {
 
+    try{
     
-    axios.post('https://chtvthme.onrender.com/conversation-api/download-file', obj)
-    .then(res => {
+      let response =  await axios.post('https://chtvthme.onrender.com/conversation-api/download-file', obj, {responseType: 'blob'})
 
-      const url = window.URL.createObjectURL(new Blob([res.data]));
+      const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement('a');
       link.href = url;
       link.setAttribute('download', obj.fileName);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      
-      if(res.status === 200){
-        setShow(true)
-        setMessage('File Downloaded Successfully..')
-      }else{
-        setShow(true)
-        setMessage(res.data.message)
-      }
-      
-    })
-    .catch(err => {
+
       setShow(true)
-      setMessage(err.message)
-    })
+      setMessage('File Downloaded Successfully..')
+
+    }catch(err){
+      setShow(true)
+      setMessage('Error while downloading the file..')
+    }
 
   }
 
