@@ -157,6 +157,7 @@ function Footer({ person, setSend }) {
       </div>
       {
       disabled === false ?
+<<<<<<< HEAD
         (spin ? 
           <Button className='btn btn-success pt-0 pb-1 mt-2 ms-2' disabled>
               <Spinner animation='border' variant='dark' size='sm'/>
@@ -167,6 +168,10 @@ function Footer({ person, setSend }) {
           </Button>
         )
         :
+=======
+        <Button className='btn btn-success pt-0 pb-1 mt-2 ms-2 me-1' onClick={submitMessage}>
+        <AiOutlineSend className='fs-6' /></Button> :
+>>>>>>> 2657abc3176d2b21c9da6eaf5696fbde33a1304e
         <>
           {spin ?
             <Button className='btn btn-success pt-0 pb-1 mt-2 ms-2' disabled>
@@ -174,9 +179,14 @@ function Footer({ person, setSend }) {
           </Button> :
           <>
           <Button className='btn btn-success pt-0 pb-1 mt-2 ms-2' onClick={submitFile}>
+<<<<<<< HEAD
             <AiOutlineSend className='fs-6' />
           </Button>
           <Button className='btn btn-secondary pt-0 pb-1 mt-2 ms-2' onClick={cancelFile}>
+=======
+          <AiOutlineSend className='fs-6' /></Button>
+          <Button className='btn btn-secondary pt-0 pb-1 mt-2 ms-2 me-1' onClick={cancelFile}>
+>>>>>>> 2657abc3176d2b21c9da6eaf5696fbde33a1304e
           <GiCancel className='fs-6' /></Button>
           </>
           }
