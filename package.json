@@ -36,7 +36,7 @@
   },
   "scripts": {
     "start": "nodemon server.js",
-    "build": "npm install && react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -58,5 +58,5 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "chtvthme.com"
+  "homepage": "https://chatvthme.onrender.com"
 }
