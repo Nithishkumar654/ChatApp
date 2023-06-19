@@ -45,7 +45,6 @@ function Convo({ person, send, setSend, setShow, setMessage }) {
     setIsLoaded(true)
   }, [person])
 
-
   if(isLoaded){
     return <div className='bg-white d-flex' style = {{height: "82%"}}>
       <Spinner className='m-auto' animation="border" variant="primary" />
