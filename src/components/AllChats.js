@@ -24,7 +24,7 @@ function AllChats({ show, setShow, message, setMessage, showPerson }) {
 
   function handleChange(event){
     axios.get('https://chtvthme.onrender.com/user-api/get-users')
-    .then(res => setUserId(res.data.users.filter(obj => obj.userid.includes(event.target.value))))
+    .then(res => setUserId(res.data.users.filter(obj => obj.userid.toLowerCase().includes(event.target.value.toLowerCase()))))
     .catch(err => console.log(err))
   }
 
