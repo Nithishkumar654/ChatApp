@@ -28,7 +28,7 @@ function Convo({ person, send, setSend, setShow, setMessage }) {
 
     let hosting = localStorage.getItem('user')
     
-    axios.post('http://localhost:3500/conversation-api/get-messages', {host: hosting, person: person.userid})
+    axios.post('https://chtvthme.onrender.com/conversation-api/get-messages', {host: hosting, person: person.userid})
     .then((response) => {
       
       setMessages(response.data.chat)
@@ -55,7 +55,7 @@ function Convo({ person, send, setSend, setShow, setMessage }) {
 
     try{
     
-      let response =  await axios.post('http://localhost:3500/conversation-api/download-file', obj, {responseType: 'blob'})
+      let response =  await axios.post('https://chtvthme.onrender.com/conversation-api/download-file', obj, {responseType: 'blob'})
 
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement('a');

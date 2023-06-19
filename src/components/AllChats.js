@@ -16,14 +16,14 @@ function AllChats({ show, setShow, message, setMessage, showPerson }) {
 
     setHost(localStorage.getItem('user'))
 
-    axios.get('http://localhost:3500/user-api/get-users')
+    axios.get('https://chtvthme.onrender.com/user-api/get-users')
     .then(res => setUserId(res.data.users))
     .catch(err => console.log(err))
 
   }, [showModal])
 
   function handleChange(event){
-    axios.get('http://localhost:3500/user-api/get-users')
+    axios.get('https://chtvthme.onrender.com/user-api/get-users')
     .then(res => setUserId(res.data.users.filter(obj => obj.userid.includes(event.target.value))))
     .catch(err => console.log(err))
   }
