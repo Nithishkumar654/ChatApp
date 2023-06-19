@@ -46,7 +46,7 @@ function Footer({ person, setSend }) {
     obj.time = hrs + ':' + mins + ':' + secs
     
     if(value.length !== 0){
-      axios.post('https://chtvthme.onrender.com/conversation-api/send-message', obj)
+      axios.post('http://localhost:3500/conversation-api/send-message', obj)
       .then(res => {
         
         setSend(true)
@@ -106,7 +106,7 @@ function Footer({ person, setSend }) {
     fd.append('file', file)
 
     
-    axios.post('https://chtvthme.onrender.com/conversation-api/send-file', fd)
+    axios.post('http://localhost:3500/conversation-api/send-file', fd)
     .then(res => {
       setSend(true)
       setValue("")

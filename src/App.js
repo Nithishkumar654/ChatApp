@@ -37,7 +37,7 @@ function App() {
     }
   ])
   return (
-    <div className = 'mt-2'>
+    <div className = ''>
       <RouterProvider router = {router} />
     </div>
   )

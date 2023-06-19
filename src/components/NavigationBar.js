@@ -25,7 +25,7 @@ function NavigationBar() {
 
     const token = localStorage.getItem('token')
 
-    axios.post('https://chtvthme.onrender.com/user-api/pathjump', {token: token})
+    axios.post('http://localhost:3500/user-api/pathjump', {token: token})
     .then(res => {
         
       if(res.data.success !== true){
@@ -42,12 +42,13 @@ function NavigationBar() {
 
   },[localStorage.getItem('user')])
   return (
-    <div className=''>
-      <Navbar bg="primary" className='' variant="dark">
+    <div className='h-100 p-0'>
+      <Navbar bg="primary" className='h-100 m-0 rounded-top' variant="dark">
         <Container>
         <NavLink className='nav-link m-2' to = '/'>
           <Navbar.Brand className='text-dark fs-3 ' style={{position: "relative"}}>
-            <img alt='' className = 'me-2 border' style={{borderRadius: '50%', width: "5%"}} src = "https://static.vecteezy.com/system/resources/previews/009/116/929/original/cvm-logo-cvm-letter-cvm-letter-logo-design-initials-cvm-logo-linked-with-circle-and-uppercase-monogram-logo-cvm-typography-for-technology-business-and-real-estate-brand-vector.jpg"/>
+            <img alt='' className = 'me-2 border' style={{borderRadius: '50%', width: "3rem"}} 
+            src = "https://static.vecteezy.com/system/resources/previews/009/116/929/original/cvm-logo-cvm-letter-cvm-letter-logo-design-initials-cvm-logo-linked-with-circle-and-uppercase-monogram-logo-cvm-typography-for-technology-business-and-real-estate-brand-vector.jpg"/>
             <p className='d-inline mt-1 ' style={{position: "absolute"}}>Cht Vth Me</p></Navbar.Brand>
           </NavLink>
           <Nav className="ms-auto">

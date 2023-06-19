@@ -66,7 +66,7 @@ userApp.post('/login', expressAsyncHandler( async(req, res) => {
             res.status(200).send({message: 'Incorrect Password'})
         }else{
 
-            let jwtToken = jwt.sign({userid: user.userid}, process.env.SECRET_KEY, {expiresIn: '10m'})
+            let jwtToken = jwt.sign({userid: user.userid}, process.env.SECRET_KEY, {expiresIn: '1d'})
 
             res.status(201).send({message: 'Login Success', success: true, token: jwtToken, user: userObj.userid})
         }
