@@ -14,7 +14,7 @@ function AllChats({ show, setShow, message, setMessage, showPerson }) {
     setHost(localStorage.getItem("user"));
 
     axios
-      .get("http://localhost:3500/user-api/get-users")
+      .get("https://chtvthme.onrender.com/user-api/get-users")
       .then((res) => setUserId(res.data.users))
       .catch((err) => console.log(err));
   }, [showModal]);
@@ -22,7 +22,7 @@ function AllChats({ show, setShow, message, setMessage, showPerson }) {
 <<<<<<< HEAD
   function handleChange(event) {
     axios
-      .get("http://localhost:3500/user-api/get-users")
+      .get("https://chtvthme.onrender.com/user-api/get-users")
       .then((res) =>
         setUserId(
           res.data.users.filter((obj) =>

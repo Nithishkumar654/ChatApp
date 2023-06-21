@@ -41,7 +41,10 @@ function Footer({ person, setSend }) {
 
     if (value.length !== 0) {
       axios
-        .post("http://localhost:3500/conversation-api/send-message", obj)
+        .post(
+          "https://chtvthme.onrender.com/conversation-api/send-message",
+          obj
+        )
         .then((res) => {
           setSend(true);
           setValue("");
@@ -96,7 +99,7 @@ function Footer({ person, setSend }) {
     fd.append("file", file);
 
     axios
-      .post("http://localhost:3500/conversation-api/send-file", fd)
+      .post("https://chtvthme.onrender.com/conversation-api/send-file", fd)
       .then((res) => {
         setSend(true);
         setValue("");

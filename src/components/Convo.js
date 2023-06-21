@@ -42,7 +42,7 @@ function Convo({ person, send, setSend, setShow, setMessage }) {
     let hosting = localStorage.getItem("user");
 
     axios
-      .post("http://localhost:3500/conversation-api/get-messages", {
+      .post("https://chtvthme.onrender.com/conversation-api/get-messages", {
         host: hosting,
         person: person.userid,
       })
@@ -71,7 +71,7 @@ function Convo({ person, send, setSend, setShow, setMessage }) {
   const handleDownload = async (obj) => {
     try {
       let response = await axios.post(
-        "http://localhost:3500/conversation-api/download-file",
+        "https://chtvthme.onrender.com/conversation-api/download-file",
         obj,
         { responseType: "blob" }
       );
@@ -101,7 +101,7 @@ function Convo({ person, send, setSend, setShow, setMessage }) {
     handleClose();
     axios
       .post(
-        "http://localhost:3500/conversation-api/delete-message",
+        "https://chtvthme.onrender.com/conversation-api/delete-message",
         deleteObject
       )
       .then((res) => {
