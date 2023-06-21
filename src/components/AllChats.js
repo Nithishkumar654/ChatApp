@@ -19,7 +19,6 @@ function AllChats({ show, setShow, message, setMessage, showPerson }) {
       .catch((err) => console.log(err));
   }, [showModal]);
 
-<<<<<<< HEAD
   function handleChange(event) {
     axios
       .get("https://chtvthme.onrender.com/user-api/get-users")
@@ -31,18 +30,6 @@ function AllChats({ show, setShow, message, setMessage, showPerson }) {
         )
       )
       .catch((err) => console.log(err));
-=======
-    axios.get('https://chtvthme.onrender.com/user-api/get-users')
-    .then(res => setUserId(res.data.users))
-    .catch(err => console.log(err))
-
-  }, [showModal])
-
-  function handleChange(event){
-    axios.get('https://chtvthme.onrender.com/user-api/get-users')
-    .then(res => setUserId(res.data.users.filter(obj => obj.userid.toLowerCase().includes(event.target.value.toLowerCase()))))
-    .catch(err => console.log(err))
->>>>>>> eabead113b6959ad11f78e6efdbd180ebedcc521
   }
 
   const showChat = (obj) => {
@@ -117,8 +104,4 @@ function AllChats({ show, setShow, message, setMessage, showPerson }) {
   );
 }
 
-<<<<<<< HEAD
 export default AllChats;
-=======
-export default AllChats
->>>>>>> eabead113b6959ad11f78e6efdbd180ebedcc521
