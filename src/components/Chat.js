@@ -29,56 +29,38 @@ function Chat() {
 
   return (
     <div className="row flex-grow-1 m-0 mt-3" style={{ position: "relative" }}>
-      {person.userid === undefined ? (
-        <div className="col col-md-4 d-block p-0" style={{ maxHeight: "100%" }}>
-          <AllChats
-            show={show}
-            setShow={setShow}
-            message={message}
-            setMessage={setMessage}
-            showPerson={showPerson}
-          />
-        </div>
-      ) : (
-        <div
-          className="col col-md-4 d-none d-md-block p-0"
-          style={{ maxHeight: "100%" }}
-        >
-          <AllChats
-            show={show}
-            setShow={setShow}
-            message={message}
-            setMessage={setMessage}
-            showPerson={showPerson}
-          />
-        </div>
-      )}
       <div
-        className="col d-none d-md-block p-0 conversations"
+        className={`col col-md-4 ${
+          person.userid ? "d-none" : "d-block"
+        } d-md-block`}
         style={{ maxHeight: "100%" }}
       >
-        {person.userid === undefined ? (
-          <EmptyChat />
-        ) : (
-          <Conversation
-            setShow={setShow}
-            setMessage={setMessage}
-            person={person}
-            showPerson={showPerson}
-          />
-        )}
+        <AllChats
+          show={show}
+          setShow={setShow}
+          message={message}
+          setMessage={setMessage}
+          showPerson={showPerson}
+        />
       </div>
 
-      {person.userid !== undefined && (
-        <div className="col d-block d-md-none" style={{ maxHeight: "100%" }}>
+      <div
+        className={`col col-md-8 ${
+          person.userid ? "d-block" : "d-none"
+        } d-md-block`}
+        style={{ maxHeight: "100%" }}
+      >
+        {person.userid ? (
           <Conversation
             setShow={setShow}
             setMessage={setMessage}
             person={person}
             showPerson={showPerson}
           />
-        </div>
-      )}
+        ) : (
+          <EmptyChat />
+        )}
+      </div>
     </div>
   );
 }
