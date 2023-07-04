@@ -37,28 +37,34 @@ function NavigationBar() {
       .catch((err) => alert("Error: " + err.message));
   }, [localStorage.getItem("user")]);
   return (
-    <div className="h-100 p-0">
-      <Navbar bg="primary" className="h-100 m-0 rounded-top" variant="dark">
-        <Container>
-          <NavLink className="nav-link m-2" to="/">
-            <Navbar.Brand
-              className="text-dark fs-3 "
-              style={{ position: "relative" }}
-            >
-              <img
-                alt=""
-                className="me-2 border"
-                style={{ borderRadius: "50%", width: "3rem" }}
-                src="https://static.vecteezy.com/system/resources/previews/009/116/929/original/cvm-logo-cvm-letter-cvm-letter-logo-design-initials-cvm-logo-linked-with-circle-and-uppercase-monogram-logo-cvm-typography-for-technology-business-and-real-estate-brand-vector.jpg"
-              />
-              <p className="d-inline mt-1 " style={{ position: "absolute" }}>
-                Cht Vth Me
-              </p>
-            </Navbar.Brand>
-          </NavLink>
-          <Nav className="ms-auto">
-            {host.length === 0 ? (
-              <div className="d-flex align-items-center">
+    <div className="h-auto p-0 w-100">
+      <nav className="h-auto m-0 rounded-top navbar navbar-expand-lg navbar-primary bg-primary">
+        <NavLink className="nav-link m-1 navbar-brand" to="/">
+          <img
+            alt=""
+            className="me-2 border"
+            style={{ borderRadius: "50%", width: "3rem" }}
+            src="https://static.vecteezy.com/system/resources/previews/009/116/929/original/cvm-logo-cvm-letter-cvm-letter-logo-design-initials-cvm-logo-linked-with-circle-and-uppercase-monogram-logo-cvm-typography-for-technology-business-and-real-estate-brand-vector.jpg"
+          />
+          <p className="d-inline mt-2 fs-4 " style={{ position: "absolute" }}>
+            Cht Vth Me
+          </p>
+        </NavLink>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="ms-auto navbar-nav align-items-center">
+            {host.length === 0 && (
+              <li className="nav-item">
                 <NavLink
                   className="nav-link"
                   to="/"
@@ -68,6 +74,10 @@ function NavigationBar() {
                 >
                   Home
                 </NavLink>
+              </li>
+            )}
+            {host.length === 0 && (
+              <li className="nav-item">
                 <NavLink
                   className="nav-link"
                   to="/login"
@@ -77,6 +87,10 @@ function NavigationBar() {
                 >
                   Login
                 </NavLink>
+              </li>
+            )}
+            {host.length === 0 && (
+              <li className="nav-item">
                 <NavLink
                   className="nav-link"
                   to="/register"
@@ -86,8 +100,9 @@ function NavigationBar() {
                 >
                   Register
                 </NavLink>
-              </div>
-            ) : (
+              </li>
+            )}
+            {host.length !== 0 && (
               <Button
                 className="text-white btn btn-danger"
                 onClick={handleLogout}
@@ -95,9 +110,9 @@ function NavigationBar() {
                 Logout
               </Button>
             )}
-          </Nav>
-        </Container>
-      </Navbar>
+          </ul>
+        </div>
+      </nav>
     </div>
   );
 }

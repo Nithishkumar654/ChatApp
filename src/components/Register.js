@@ -6,7 +6,11 @@ import { BiHide, BiShow } from "react-icons/bi";
 import { NavLink, useNavigate } from "react-router-dom";
 
 function Register() {
-  let { register, handleSubmit } = useForm();
+  let {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   let [err, setErr] = useState("");
   const navigate = useNavigate();
   let [show, setShow] = useState(false);
@@ -27,8 +31,8 @@ function Register() {
 
   return (
     <div
-      className="container d-flex flex-wrap justify-content-around"
-      style={{ minHeight: "650px", position: "relative" }}
+      className="container d-flex flex-wrap justify-content-around h-100 overflow-auto"
+      style={{ position: "relative" }}
     >
       <div
         className="mt-auto mb-auto"
@@ -44,23 +48,20 @@ function Register() {
           alt=""
           style={{
             position: "absolute",
-            width: "8rem",
+            width: "25%",
             borderRadius: "50%",
-            top: "11rem",
-            left: "16rem",
+            top: "33%",
+            left: "37%",
           }}
           className=""
           src="https://static.vecteezy.com/system/resources/previews/009/116/929/non_2x/cvm-logo-cvm-letter-cvm-letter-logo-design-initials-cvm-logo-linked-with-circle-and-uppercase-monogram-logo-cvm-typography-for-technology-business-and-real-estate-brand-vector.jpg"
         />
       </div>
-      <div
-        className="d-flex align-items-center justify-content-center me-5"
-        style={{ position: "relative" }}
-      >
+      <div className="d-flex align-items-center justify-content-center me-5 ms-5">
         <form
           className="d-flex flex-column"
           style={{ position: "" }}
-          onClick={handleSubmit(submitRegister)}
+          onSubmit={handleSubmit(submitRegister)}
         >
           <h1 className="display-6 mb-5 text- text-center">
             {" "}
@@ -76,6 +77,9 @@ function Register() {
           <label className="ms-5 text-dark">
             *This will be used as your Name in the Chats
           </label>
+          {errors.username?.type === "required" && (
+            <p className="text-danger">*UserName is required</p>
+          )}
           <input
             type="text"
             className="mt-3 rounded fs-5 ps-2"
@@ -85,12 +89,18 @@ function Register() {
           <label className="ms-5 text-dark">
             *This will be used as your UserID in the Chats
           </label>
+          {errors.userid?.type === "required" && (
+            <p className="text-danger">*UserID is required</p>
+          )}
           <input
             type="email"
             className="mt-3 rounded fs-5 ps-2"
             placeholder="Enter your Email"
             {...register("email", { required: true })}
           />
+          {errors.email?.type === "required" && (
+            <p className="text-danger">*Email is required</p>
+          )}
           <input
             type="number"
             className="mt-3 rounded fs-5 ps-2"
@@ -115,6 +125,9 @@ function Register() {
               )}
             </NavLink>
           </div>
+          {errors.password?.type === "required" && (
+            <p className="text-danger">*Password is required</p>
+          )}
           <div className="d-flex p-0">
             <input
               type={repeatShow ? "text" : "password"}
@@ -133,12 +146,15 @@ function Register() {
               )}
             </NavLink>
           </div>
+          {errors.repeatPassword?.type === "required" && (
+            <p className="text-danger">*RepeatPassword is required</p>
+          )}
           <label className="mt-3 text-dark lead fs-5">
             Upload your profile pic
           </label>
           <input type="file" {...register("picture")} />
           <Button
-            className="btn btn-success text-center m-auto mt-3"
+            className="btn btn-success text-center m-auto mt-3 mb-3"
             type="submit"
             style={{ width: "35%" }}
           >

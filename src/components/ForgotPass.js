@@ -64,34 +64,34 @@ function ForgotPass() {
   }
 
   return (
-    <div
-      className="container d-flex align-items- bg-danger bg-opacity-10 p-0"
-      style={{ height: "640px" }}
-    >
-      <img
-        alt=""
-        src="https://cdn.dribbble.com/users/267404/screenshots/3713416/media/6a7e93dc6473c86476d748e82f917cea.png?compress=1&resize=800x600&vertical=center"
-        className=""
-        style={{
-          position: "relative",
-          objectFit: "cover",
-          height: "100%",
-          width: "50%",
-        }}
-      />
-      <img
-        alt=""
-        style={{
-          position: "absolute",
-          width: "10%",
-          borderRadius: "50%",
-          top: "45%",
-          left: "23%",
-        }}
-        className=""
-        src="https://static.vecteezy.com/system/resources/previews/009/116/929/non_2x/cvm-logo-cvm-letter-cvm-letter-logo-design-initials-cvm-logo-linked-with-circle-and-uppercase-monogram-logo-cvm-typography-for-technology-business-and-real-estate-brand-vector.jpg"
-      />
-      <div className="d-flex flex-column justify-content-center align-items-center w-100">
+    <div className="container d-flex flex-wrap p-0 h-100 overflow-auto">
+      <div
+        className="mx-auto my-auto"
+        style={{ position: "relative", width: "40rem" }}
+      >
+        <img
+          alt=""
+          src="https://cdn.dribbble.com/users/267404/screenshots/3713416/media/6a7e93dc6473c86476d748e82f917cea.png?compress=1&resize=800x600&vertical=center"
+          className="w-100 "
+          style={{
+            position: "relative",
+            borderRadius: "50%",
+          }}
+        />
+        <img
+          alt=""
+          style={{
+            position: "absolute",
+            width: "25%",
+            borderRadius: "50%",
+            top: "33%",
+            left: "37%",
+          }}
+          className=""
+          src="https://static.vecteezy.com/system/resources/previews/009/116/929/non_2x/cvm-logo-cvm-letter-cvm-letter-logo-design-initials-cvm-logo-linked-with-circle-and-uppercase-monogram-logo-cvm-typography-for-technology-business-and-real-estate-brand-vector.jpg"
+        />
+      </div>
+      <div className="d-flex flex-column justify-content-center align-items-center mx-auto my-auto">
         {err.length !== 0 && <p className="lead text-danger">{err}</p>}
         {email && (
           <form

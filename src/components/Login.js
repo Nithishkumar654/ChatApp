@@ -27,14 +27,10 @@ function Login() {
       .catch((error) => setErr(error.message));
   }
 
-  function handleClick(e) {
-    e.preventDefault();
-    console.log(e);
-  }
   return (
     <div
-      className="container d-flex flex-wrap justify-content-evenly"
-      style={{ minHeight: "650px" }}
+      className="container d-flex flex-wrap justify-content-evenly overflow-auto h-100"
+      style={{ position: "relative" }}
     >
       <div className="mt-auto mb-auto" style={{ position: "relative" }}>
         <img
@@ -47,7 +43,7 @@ function Login() {
 
         <h1
           className="text-warning"
-          style={{ position: "absolute", top: "15rem", left: "5rem" }}
+          style={{ position: "absolute", top: "60%", left: "15%" }}
         >
           <i>C V M</i>
           <p className="lead ms-5 text-white"> - Cht Vth Me</p>
@@ -70,7 +66,7 @@ function Login() {
           onSubmit={handleSubmit(submitLogin)}
           className="text-center d-flex flex-column justify-content-center align-items-center"
         >
-          <h1 className="display-5">
+          <h1 className="display-5 mt-4">
             {" "}
             Login To <i>Cht</i>
           </h1>

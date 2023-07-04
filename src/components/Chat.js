@@ -28,10 +28,7 @@ function Chat() {
   }, []);
 
   return (
-    <div
-      className="row flex-grow-1 m-0"
-      style={{ maxHeight: "100%", position: "relative" }}
-    >
+    <div className="row flex-grow-1 m-0 mt-3" style={{ position: "relative" }}>
       {person.userid === undefined ? (
         <div className="col col-md-4 d-block p-0" style={{ maxHeight: "100%" }}>
           <AllChats

@@ -6,7 +6,7 @@ import { FiMoreVertical } from "react-icons/fi";
 function Header({ person, showPerson }) {
   return (
     <div
-      className="d-flex p-2 ps-3 bg-dark bg-opacity-25 justify-content-center align-items-center"
+      className="d-flex p-2 ps-3 bg-dark bg-opacity-25 justify-content-center align-items-center rounded-top"
       style={{ height: "8%" }}
     >
       <div className="d-flex align-items-center">
