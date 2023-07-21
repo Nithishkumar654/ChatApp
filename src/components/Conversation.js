@@ -4,18 +4,17 @@ import Footer from "./Footer";
 import Header from "./Header";
 
 function Conversation({ setShow, setMessage, person, showPerson }) {
-  let [send, setSend] = useState(false);
+  const [search, setSearch] = useState("");
   return (
     <>
-      <Header person={person} showPerson={showPerson} />
+      <Header person={person} showPerson={showPerson} setSearch={setSearch} />
       <Convo
         person={person}
-        send={send}
-        setSend={setSend}
         setShow={setShow}
         setMessage={setMessage}
+        search={search}
       />
-      <Footer person={person} setSend={setSend} />
+      <Footer person={person} />
     </>
   );
 }

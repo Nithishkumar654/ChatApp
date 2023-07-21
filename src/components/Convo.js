@@ -14,15 +14,15 @@ import {
 import { BsChevronDoubleDown } from "react-icons/bs";
 import { IoMdDownload } from "react-icons/io";
 import { RiArrowDropDownLine } from "react-icons/ri";
+import socket from "../socket";
 
-function Convo({ person, send, setSend, setShow, setMessage }) {
+function Convo({ person, setShow, setMessage, search }) {
   let [messages, setMessages] = useState();
   let [host, setHost] = useState("");
   let [isLoaded, setIsLoaded] = useState(true);
-
   const [showModal, setShowModal] = useState(false);
   const [deleteObject, setDeleteObject] = useState({});
-
+  const [state, setState] = useState(true);
   function handleClose() {
     setShowModal(false);
     setDeleteObject({});
@@ -47,14 +47,25 @@ function Convo({ person, send, setSend, setShow, setMessage }) {
         person: person.userid,
       })
       .then((response) => {
-        setMessages(response.data.chat);
+        setMessages(
+          response.data.chat.filter(
+            (obj) =>
+              obj.message?.toLowerCase().includes(search) ||
+              obj.fileName?.toLowerCase().includes(search)
+          )
+        );
         setShow(false);
         setMessage("");
-        setSend(false);
         setIsLoaded(false);
       })
       .catch((err) => console.log(err.message));
-  }, [send, person]);
+  }, [person, search, state]);
+
+  socket.on("message-sent", (data) => {
+    if (data.senderId === host || data.receiverId === host) {
+      setState(!state);
+    }
+  });
 
   useEffect(() => {
     setIsLoaded(true);
@@ -105,11 +116,9 @@ function Convo({ person, send, setSend, setShow, setMessage }) {
         deleteObject
       )
       .then((res) => {
-        setSend(true);
         setMessage(res.data.message);
       })
       .catch((err) => {
-        setSend(true);
         setMessage(err.message);
         setDeleteObject({});
       });

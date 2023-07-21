@@ -62,7 +62,7 @@ function NavigationBar() {
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="ms-auto navbar-nav align-items-center">
+          <ul className="ms-auto navbar-nav align-items-center me-2">
             {host.length === 0 && (
               <li className="nav-item">
                 <NavLink

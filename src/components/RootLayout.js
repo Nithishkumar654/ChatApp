@@ -15,8 +15,8 @@ function RootLayout() {
         <NavigationBar />
       </div>
       <div
-        className="d-flex bg-danger bg-opacity-10 rounded-bottom mt-auto"
-        style={{ height: "90%" }}
+        className="d-flex rounded-bottom mt-auto shadow"
+        style={{ height: "90%", backgroundColor: "#f1f2f6" }}
       >
         <Outlet />
       </div>

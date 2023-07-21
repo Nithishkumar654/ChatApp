@@ -1,6 +1,6 @@
 import axios from "axios";
 import EmojiPicker from "emoji-picker-react";
-import React, { useEffect, useState } from "react";
+import React, { createElement, useEffect, useState } from "react";
 import { Button, OverlayTrigger, Popover } from "react-bootstrap";
 import Spinner from "react-bootstrap/Spinner";
 import { useForm } from "react-hook-form";
@@ -8,14 +8,16 @@ import { AiOutlineSend } from "react-icons/ai";
 import { BsEmojiSunglasses } from "react-icons/bs";
 import { GiCancel } from "react-icons/gi";
 import { GrAttachment } from "react-icons/gr";
+import socket from "../socket";
 
-function Footer({ person, setSend }) {
+function Footer({ person }) {
   let { handleSubmit } = useForm();
   let [host, setHost] = useState("");
   let [value, setValue] = useState("");
   let [disabled, setDisabled] = useState(false);
   let [file, setFile] = useState(null);
   let [spin, setSpin] = useState(false);
+  const [bFile, setBFile] = useState("");
 
   function submitMessage() {
     setSpin(true);
@@ -46,9 +48,12 @@ function Footer({ person, setSend }) {
           obj
         )
         .then((res) => {
-          setSend(true);
           setValue("");
           setSpin(false);
+          const socketObj = {};
+          socketObj.senderId = host;
+          socketObj.receiverId = person.userid;
+          socket.emit("message-sent", socketObj);
         })
         .catch((err) => console.log(err.message));
     } else {
@@ -65,6 +70,7 @@ function Footer({ person, setSend }) {
   }
 
   function handleFile(event) {
+    console.log(event.target.files[0]);
     setFile(event.target.files[0]);
     setValue(event.target.files[0].name);
     setDisabled(true);
@@ -92,6 +98,8 @@ function Footer({ person, setSend }) {
 
     obj.fileName = file.name;
 
+    //obj.bfile = bFile;
+
     let fd = new FormData();
 
     fd.append("details", JSON.stringify(obj));
@@ -101,10 +109,13 @@ function Footer({ person, setSend }) {
     axios
       .post("https://chtvthme.onrender.com/conversation-api/send-file", fd)
       .then((res) => {
-        setSend(true);
         setValue("");
         setSpin(false);
         setDisabled(false);
+        const socketObj = {};
+        socketObj.senderId = host;
+        socketObj.receiverId = person.userid;
+        socket.emit("message-sent", socketObj);
       })
       .catch((err) => console.log(err.message));
   }
