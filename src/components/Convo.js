@@ -50,8 +50,8 @@ function Convo({ person, setShow, setMessage, search }) {
         setMessages(
           response.data.chat.filter(
             (obj) =>
-              obj.message?.toLowerCase().includes(search) ||
-              obj.fileName?.toLowerCase().includes(search)
+              obj.message?.toLowerCase().includes(search.toLowerCase()) ||
+              obj.fileName?.toLowerCase().includes(search.toLowerCase())
           )
         );
         setShow(false);
