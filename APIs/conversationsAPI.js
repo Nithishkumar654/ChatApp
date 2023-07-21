@@ -7,9 +7,6 @@ const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const { GridFsStorage } = require("multer-gridfs-storage");
 const url = process.env.DB;
-const fs = require("fs");
-const path = require("path");
-const os = require("os");
 
 const multer = require("multer");
 
@@ -88,50 +85,16 @@ conversationsApp.post(
 
     const newMessage = JSON.parse(req.body.details);
 
-    console.log(req.file);
-
     newMessage.fileType = req.file.mimetype;
 
     newMessage.filename = req.file.filename;
 
-    console.log("hi");
-    const dbTest = req.app.get("dbTest");
-
-    const bucket = new mongo.GridFSBucket(dbTest);
-
-    console.log('bucket');
-    const fileStream = fs.createReadStream(
-      "C:/Users/DELL/Downloads/Resume.pdf"
-    );
-    const uploadStream = bucket.openUploadStream("Resume");
-
-    fileStream.pipe(uploadStream);
-
-    uploadStream.on("error", (error) => {
-      // Handle error
-      console.log(error);
-    });
-
-    uploadStream.on("finish", () => {
-      // File upload finished successfully
-      console.log("finish");
-    });
-
-    const downloadsFolderPath = path.join(os.homedir(), 'Downloads');
-
-    bucket.openDownloadStreamByName('Resume').
-     pipe(fs.createWriteStream(path.join(downloadsFolderPath, 'Resume_1.pdf')));
-
-
-    console.log("success");
-    // try {
-    //   await conversationsCollectionObj.insertOne(newMessage);
-    //   res.status(200).send({ success: true, message: "File Sent.." });
-    // } catch (err) {
-    //   res.status(400).send({ message: "Error occured while Sending File.." });
-    // }
-
-    res.send({ success: true });
+    try {
+      await conversationsCollectionObj.insertOne(newMessage);
+      res.status(200).send({ success: true, message: "File Sent.." });
+    } catch (err) {
+      res.status(400).send({ message: "Error occured while Sending File.." });
+    }
   })
 );
 
