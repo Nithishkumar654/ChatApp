@@ -22,6 +22,9 @@ io.on("connection", (socket) => {
   socket.on("message-sent", (data) => {
     io.emit("message-sent", data);
   });
+  socket.on("delete-message", (data) => {
+    io.emit("delete-message", data);
+  })
 });
 
 const userApp = require("./APIs/usersAPI");

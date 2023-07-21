@@ -66,6 +66,11 @@ function Convo({ person, setShow, setMessage, search }) {
       setState(!state);
     }
   });
+  socket.on("delete-message", (data) => {
+    if (data.senderId === host || data.receiverId === host) {
+      setState(!state);
+    }
+  });
 
   useEffect(() => {
     setIsLoaded(true);
@@ -117,6 +122,10 @@ function Convo({ person, setShow, setMessage, search }) {
       )
       .then((res) => {
         setMessage(res.data.message);
+        const socketObj = {};
+        socketObj.senderId = host;
+        socketObj.receiverId = person.userid;
+        socket.emit("delete-message", socketObj);
       })
       .catch((err) => {
         setMessage(err.message);
