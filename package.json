@@ -18,6 +18,7 @@
     "express-async-handler": "^1.2.0",
     "gridfs-stream": "^1.1.1",
     "jsonwebtoken": "^9.0.0",
+    "latest-version": "^7.0.0",
     "mongodb": "^5.6.0",
     "multer": "^1.4.4-lts.1",
     "multer-gridfs-storage": "^5.0.2",
@@ -37,7 +38,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
