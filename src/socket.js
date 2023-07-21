@@ -1,4 +1,4 @@
-import io from "../node_modules/socket.io/client-dist/socket.io.js";
+import io from "socket.io-client";
 
 const socket = io();
 
