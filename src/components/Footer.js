@@ -17,7 +17,6 @@ function Footer({ person }) {
   let [disabled, setDisabled] = useState(false);
   let [file, setFile] = useState(null);
   let [spin, setSpin] = useState(false);
-  const [bFile, setBFile] = useState("");
 
   function submitMessage() {
     setSpin(true);
@@ -124,6 +123,17 @@ function Footer({ person }) {
     setValue("");
     setDisabled(false);
   }
+
+  useEffect(() => {
+    const socketObj = {};
+    socketObj.senderId = host;
+    socketObj.receiverId = person.userid;
+    if (value.length !== 0) {
+      socket.emit("typing", socketObj);
+    } else {
+      socket.emit("not-typing", socketObj);
+    }
+  }, [value]);
 
   useEffect(() => {
     setHost(localStorage.getItem("user"));

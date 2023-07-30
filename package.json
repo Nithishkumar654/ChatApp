@@ -12,11 +12,13 @@
     "bootstrap": "^5.3.0",
     "cloudinary": "^1.37.1",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "dotenv": "^16.3.0",
     "emoji-picker-react": "^4.4.9",
     "express": "^4.18.2",
     "express-async-handler": "^1.2.0",
     "gridfs-stream": "^1.1.1",
+    "http-proxy-middleware": "^2.0.6",
     "jsonwebtoken": "^9.0.0",
     "latest-version": "^7.0.0",
     "mongodb": "^5.6.0",
@@ -61,5 +63,10 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://chtvthme.onrender.com"
+  "homepage": "https://chtvthme.onrender.com",
+  "devDependencies": {
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  }
 }

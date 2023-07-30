@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router-dom";
+import socket from "../socket";
 
 function NavigationBar() {
   let [host, setHost] = useState("");
@@ -16,6 +17,8 @@ function NavigationBar() {
     color: "white",
   };
   function handleLogout() {
+    let host = localStorage.getItem("user");
+    socket.emit("remove-user", host);
     localStorage.clear();
     navigate("/login");
   }

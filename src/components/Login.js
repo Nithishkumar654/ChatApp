@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { BiHide, BiShow } from "react-icons/bi";
 import { NavLink, useNavigate } from "react-router-dom";
+import socket from "../socket";
 
 function Login() {
   let { register, handleSubmit } = useForm();
@@ -19,6 +20,7 @@ function Login() {
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("user", res.data.user);
           setErr("");
+          socket.emit("new-connection", res.data.user);
           navigate("/chat");
         } else {
           setErr(res.data.message);

@@ -23,6 +23,8 @@ function Convo({ person, setShow, setMessage, search }) {
   const [showModal, setShowModal] = useState(false);
   const [deleteObject, setDeleteObject] = useState({});
   const [state, setState] = useState(true);
+  const [scroll, setScroll] = useState(false);
+
   function handleClose() {
     setShowModal(false);
     setDeleteObject({});
@@ -57,6 +59,7 @@ function Convo({ person, setShow, setMessage, search }) {
         setShow(false);
         setMessage("");
         setIsLoaded(false);
+        setScroll(!scroll);
       })
       .catch((err) => console.log(err.message));
   }, [person, search, state]);
@@ -75,6 +78,10 @@ function Convo({ person, setShow, setMessage, search }) {
   useEffect(() => {
     setIsLoaded(true);
   }, [person]);
+
+  useEffect(() => {
+    scrollDown();
+  }, [scroll]);
 
   if (isLoaded) {
     return (
@@ -435,7 +442,7 @@ function Convo({ person, setShow, setMessage, search }) {
 
       <BsChevronDoubleDown
         className="bg-secondary text-white p-1 btn fs-5"
-        onClick={scrollDown}
+        onClick={() => setScroll(!scroll)}
         style={{
           position: "absolute",
           bottom: "1rem",
