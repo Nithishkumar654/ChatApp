@@ -10,11 +10,15 @@ function Home() {
   }, []);
 
   return (
-    <div className="border w-100 d-flex" style={{ maxHeight: "100%" }}>
+    <div
+      className="border w-100 d-flex bg- bg-opacity-50"
+      style={{ maxHeight: "100%" }}
+    >
       <img
-        className="m-auto w-100"
-        style={{ maxHeight: "100%" }}
+        className="img-fluid m-auto p-5 rounded-circle"
+        style={{ maxHeight: "80%" }}
         src={homeImage}
+        alt="Home"
       />
     </div>
   );
