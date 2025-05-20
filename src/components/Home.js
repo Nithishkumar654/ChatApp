@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import homeImage from "../assets/Home.png";
 
 function Home() {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ function Home() {
       <img
         className="m-auto w-100"
         style={{ maxHeight: "100%" }}
-        src="https://f4n3x6c5.stackpathcdn.com/article/what-is-mern-stack/Images/The%20MERN%20Stack.jpg"
+        src={homeImage}
       />
     </div>
   );
